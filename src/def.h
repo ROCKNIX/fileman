@@ -90,8 +90,8 @@
    #define KEYBOARD_KEY_SPACING     10
    #define KEYBOARD_SYMBOL_SIZE     58
 
-// Parameters for rk3588
-#elif defined(DEVICE_RK3588_ACE)
+// Parameters for sd865
+#elif defined(DEVICE_SD865)
    #define SCREEN_WIDTH             1280
    #define SCREEN_HEIGHT            720
    #define HARDWARE_ACCELERATION    0
@@ -182,7 +182,7 @@
 #define VIEWER_SCROLL_SPEED      20
 
 // Button events
-#if defined(DEVICE_AMD64) || defined(DEVICE_RK3326) || defined(DEVICE_RK3399) || defined(DEVICE_RK3566) || defined(DEVICE_RK3566_X55) || defined(DEVICE_RK3588) || defined(DEVICE_RK3588_ACE) || defined(DEVICE_S922X)
+#if defined(DEVICE_AMD64) || defined(DEVICE_RK3326) || defined(DEVICE_RK3399) || defined(DEVICE_RK3566) || defined(DEVICE_RK3566_X55) || defined(DEVICE_RK3588) || defined(DEVICE_SD865) || defined(DEVICE_S922X)
    #define BUTTON_PRESSED_UP              event.type == SDL_KEYDOWN && event.key.repeat == 0 && (event.key.keysym.sym == SDLK_UP || event.key.keysym.sym == SDLK_w)
    #define BUTTON_PRESSED_DOWN            event.type == SDL_KEYDOWN && event.key.repeat == 0 && (event.key.keysym.sym == SDLK_DOWN || event.key.keysym.sym == SDLK_s)
    #define BUTTON_PRESSED_LEFT            event.type == SDL_KEYDOWN && event.key.repeat == 0 && event.key.keysym.sym == SDLK_LEFT
