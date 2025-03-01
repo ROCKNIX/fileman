@@ -122,6 +122,22 @@
    #define KEYBOARD_KEY_SPACING     10
    #define KEYBOARD_SYMBOL_SIZE     58
 
+// Parameters for SM8550
+#elif defined(DEVICE_SM8250)
+   #define SCREEN_WIDTH             1280
+   #define SCREEN_HEIGHT            720
+   #define HARDWARE_ACCELERATION    0
+   #define FULLSCREEN               1
+   #define FONT_NAME                "NotoSans-Regular.ttf"
+   #define FONT_NAME_MONO           "NotoSansMono-Regular.ttf"
+   #define FONT_SIZE                48
+   #define LINE_HEIGHT              72
+   #define ICON_SIZE                58
+   #define MARGIN_X                 24
+   #define KEYBOARD_MARGIN          19
+   #define KEYBOARD_KEY_SPACING     10
+   #define KEYBOARD_SYMBOL_SIZE     58
+
 // Parameters for handheld
 #elif defined(DEVICE_AMD64)
    #define SCREEN_WIDTH             1280
@@ -198,7 +214,7 @@
 #define VIEWER_SCROLL_SPEED      20
 
 // Button events
-#if defined(DEVICE_AMD64) || defined(DEVICE_RK3326) || defined(DEVICE_RK3399) || defined(DEVICE_RK3566) || defined(DEVICE_RK3566_X55) || defined(DEVICE_RK3588) || defined(DEVICE_SM8250) || defined(DEVICE_S922X) || defined(DEVICE_H700)
+#if defined(DEVICE_AMD64) || defined(DEVICE_RK3326) || defined(DEVICE_RK3399) || defined(DEVICE_RK3566) || defined(DEVICE_RK3566_X55) || defined(DEVICE_RK3588) || defined(DEVICE_SM8250) || defined(DEVICE_SM8550) || defined(DEVICE_S922X) || defined(DEVICE_H700)
    #define BUTTON_PRESSED_UP              event.type == SDL_KEYDOWN && event.key.repeat == 0 && (event.key.keysym.sym == SDLK_UP || event.key.keysym.sym == SDLK_w)
    #define BUTTON_PRESSED_DOWN            event.type == SDL_KEYDOWN && event.key.repeat == 0 && (event.key.keysym.sym == SDLK_DOWN || event.key.keysym.sym == SDLK_s)
    #define BUTTON_PRESSED_LEFT            event.type == SDL_KEYDOWN && event.key.repeat == 0 && event.key.keysym.sym == SDLK_LEFT
