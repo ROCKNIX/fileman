@@ -123,7 +123,7 @@
    #define KEYBOARD_SYMBOL_SIZE     58
 
 // Parameters for SM8550
-#elif defined(DEVICE_SM8250)
+#elif defined(DEVICE_SM8550)
    #define SCREEN_WIDTH             1280
    #define SCREEN_HEIGHT            720
    #define HARDWARE_ACCELERATION    0
