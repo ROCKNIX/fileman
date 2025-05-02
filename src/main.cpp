@@ -33,6 +33,7 @@ SDL_Texture *g_iconNone = NULL;
 SDL_Texture *g_iconNewDir = NULL;
 SDL_Texture *g_iconQuit = NULL;
 SDL_Texture *g_iconEdit = NULL;
+SDL_Texture *g_iconExecute = NULL;
 SDL_Texture *g_iconCancel = NULL;
 SDL_Texture *g_iconFloppy = NULL;
 SDL_Texture *g_iconImage = NULL;
@@ -66,6 +67,7 @@ int main(int argc, char* args[])
    g_iconNewDir =    SDLUtils::loadTexture(std::string(RES_PATH) + oss.str() + "/folder-new.png");
    g_iconQuit =      SDLUtils::loadTexture(std::string(RES_PATH) + oss.str() + "/quit.png");
    g_iconEdit =      SDLUtils::loadTexture(std::string(RES_PATH) + oss.str() + "/edit.png");
+   g_iconExecute =   SDLUtils::loadTexture(std::string(RES_PATH) + oss.str() + "/execute.png");
    g_iconCancel =    SDLUtils::loadTexture(std::string(RES_PATH) + oss.str() + "/cancel.png");
    g_iconFloppy =    SDLUtils::loadTexture(std::string(RES_PATH) + oss.str() + "/floppy.png");
    g_iconImage =     SDLUtils::loadTexture(std::string(RES_PATH) + oss.str() + "/image.png");
@@ -110,6 +112,7 @@ int main(int argc, char* args[])
    if (g_iconNewDir != NULL)     { SDL_DestroyTexture(g_iconNewDir);    g_iconNewDir = NULL; }
    if (g_iconQuit != NULL)       { SDL_DestroyTexture(g_iconQuit);      g_iconQuit = NULL; }
    if (g_iconEdit != NULL)       { SDL_DestroyTexture(g_iconEdit);      g_iconEdit = NULL; }
+   if (g_iconExecute != NULL)    { SDL_DestroyTexture(g_iconExecute);   g_iconExecute = NULL; }
    if (g_iconCancel != NULL)     { SDL_DestroyTexture(g_iconCancel);    g_iconCancel = NULL; }
    if (g_iconFloppy != NULL)     { SDL_DestroyTexture(g_iconFloppy);    g_iconFloppy = NULL; }
    if (g_iconImage != NULL)      { SDL_DestroyTexture(g_iconImage);     g_iconImage = NULL; }

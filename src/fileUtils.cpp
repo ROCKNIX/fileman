@@ -10,8 +10,11 @@
 #include <signal.h>
 #endif
 #include "fileUtils.h"
+#include "sdlutils.h"
 #include "def.h"
 #include "dialog.h"
+
+#define SPECIAL_CHARS "\\`$();|{}&'\"*?<>[]!^~-#\n\r "
 
 namespace FileUtils
 {
@@ -125,6 +128,69 @@ void FileUtils::toLower(std::string &s)
    for (char &c : s)
       if (c >= 'A' && c <= 'Z')
          c -= ('Z' - 'z');
+}
+
+//------------------------------------------------------------------------------
+
+// Insert '\' before special characters
+std::string FileUtils::addBackslashBeforeSpecialChars(const std::string &p_string)
+{
+   // Insert a '\' before special characters
+   std::string l_ret(p_string);
+   const std::string l_specialChars(SPECIAL_CHARS);
+   const size_t l_length = l_specialChars.size();
+   std::string l_char("");
+   for (unsigned int l_i = 0; l_i < l_length; ++l_i)
+   {
+      l_char = l_specialChars.substr(l_i, 1);
+      stringReplace(l_ret, l_char, "\\" + l_char);
+   }
+   return l_ret;
+}
+
+//------------------------------------------------------------------------------
+
+// Replace all occurrences of p_search by p_replace in p_string
+void FileUtils::stringReplace(std::string &p_string, const std::string &p_search, const std::string &p_replace)
+{
+   size_t l_pos = p_string.find(p_search, 0);
+   while (l_pos != std::string::npos)
+   {
+      p_string.replace(l_pos, p_search.length(), p_replace);
+      l_pos = p_string.find(p_search, l_pos + p_replace.length());
+   }
+}
+
+//------------------------------------------------------------------------------
+
+// Get execution path
+std::string FileUtils::getSelfExecutionName()
+{
+    // Get execution path
+    std::string l_exePath("");
+    char l_buff[255];
+    int l_i = readlink("/proc/self/exe", l_buff, 255);
+    l_exePath = l_buff;
+    l_exePath = l_exePath.substr(0, l_i);
+    l_i = l_exePath.rfind("/");
+    l_exePath = l_exePath.substr(l_i + 1);
+    return l_exePath;
+}
+
+//------------------------------------------------------------------------------
+
+// Get execution path
+std::string FileUtils::getSelfExecutionPath()
+{
+    // Get execution path
+    std::string l_exePath("");
+    char l_buff[255];
+    int l_i = readlink("/proc/self/exe", l_buff, 255);
+    l_exePath = l_buff;
+    l_exePath = l_exePath.substr(0, l_i);
+    l_i = l_exePath.rfind("/");
+    l_exePath = l_exePath.substr(l_i);
+    return l_exePath;
 }
 
 //------------------------------------------------------------------------------
@@ -317,6 +383,30 @@ void FileUtils::renameFile(const std::string &p_file1, const std::string &p_file
    INHIBIT(std::cout << "Rename file " << p_file1 << " to " << p_file2 << '\n';)
    Run("mv", p_file1, p_file2);
    Run("sync", p_file2);
+}
+
+//------------------------------------------------------------------------------
+
+// Execute a file
+void FileUtils::executeFile(const std::string &p_file)
+{
+   // Command
+   std::string file_name = addBackslashBeforeSpecialChars(getFileName(p_file));
+   std::string l_command = "chmod +x \"" + file_name + "\" && ./\"" + file_name + "\"";
+   INHIBIT(std::cout << "Execute file " << l_command << " in " << getDirName(p_file) << '\n';)
+   // CD to the file's location
+   chdir(getDirName(p_file).c_str());
+   // Quit
+   SDLUtils::close();
+   // Execute file
+   execlp("/bin/sh", "/bin/sh", "-c", l_command.c_str(), NULL);
+   // If we're here, there was an error with the execution
+   std::cerr << "Error executing file " << p_file << std::endl;
+   // Relaunch
+   l_command = "./" + addBackslashBeforeSpecialChars(getSelfExecutionName());
+   INHIBIT(std::cout << "Execute file " << l_command << " in " << getSelfExecutionPath() << std::endl;)
+   chdir(getSelfExecutionPath().c_str());
+   execlp(l_command.c_str(), l_command.c_str(), NULL);
 }
 
 //------------------------------------------------------------------------------
