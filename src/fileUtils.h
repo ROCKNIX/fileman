@@ -24,6 +24,9 @@ namespace FileUtils
    // Rename a file
    void renameFile(const std::string &p_file1, const std::string &p_file2);
 
+   // Execute a file
+   void executeFile(const std::string &p_file);
+
 //------------------------------------------------------------------------------
    // File utilities
 //------------------------------------------------------------------------------
@@ -55,6 +58,17 @@ namespace FileUtils
    // String to lower case
    void toLower(std::string &s);
 
+   // Insert '\' before special characters
+   std::string addBackslashBeforeSpecialChars(const std::string &p_string);
+
+   // Replace all occurrences of p_search by p_replace in p_string
+   void stringReplace(std::string &p_string, const std::string &p_search, const std::string &p_replace);
+
+   // Get execution path
+   std::string getSelfExecutionName();
+
+   // Get execution path
+   std::string getSelfExecutionPath();
 }
 
 #endif

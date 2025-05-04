@@ -382,7 +382,10 @@ void MainWindow::openContextMenu(void)
       if (nbSelected > 0)
          l_dialog.addOption("Delete", 3, g_iconTrash);
       if (nbSelected == 1)
+      {
          l_dialog.addOption("Rename", 9, g_iconEdit);
+         l_dialog.addOption("Execute", 10, g_iconExecute);
+      }
       if (m_fileLister.getNbSelected('d') > 0)
          l_dialog.addOption("Size", 4, g_iconDisk);
       l_dialog.addOption("Select all", 5, g_iconSelect);
@@ -465,6 +468,14 @@ void MainWindow::openContextMenu(void)
             FileUtils::renameFile(m_title + (m_title == "/" ? "" : "/") + fileSrc, m_title + (m_title == "/" ? "" : "/") + textInput.getInputText());
             refresh();
          }
+      }
+      break;
+      // Execute
+      case 10:
+      {
+         std::string fileSrc = m_fileLister.getSelectFirst();
+         FileUtils::executeFile(m_title + (m_title == "/" ? "" : "/") + fileSrc);
+         refresh();
       }
       break;
       default:

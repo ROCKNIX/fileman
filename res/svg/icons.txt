@@ -4,6 +4,7 @@ elementary-xfce/actions/"$ICON_SIZE"/edit-copy.svg                edit-copy.svg
 elementary-xfce/actions/"$ICON_SIZE"/edit-paste.svg               edit-paste.svg
 elementary-xfce/actions/"$ICON_SIZE"/edit-cut.svg                 edit-cut.svg
 elementary-xfce/actions/"$ICON_SIZE"/gtk-edit.svg                 edit.svg
+elementary-xfce/actions/"$ICON_SIZE"/system-run.svg               execute.svg
 elementary-xfce/mimes/"$ICON_SIZE"/text.svg                       file.svg
 elementary-xfce/mimes/"$ICON_SIZE"/text-x-script.svg              file-text.svg
 elementary-xfce/devices/"$ICON_SIZE"/media-floppy.svg             floppy.svg
